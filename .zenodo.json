@@ -1,0 +1,30 @@
+{
+  "title": "SoPhyFit-Evap: Soil physics fitting tool for evaporation-method retention and conductivity data",
+  "upload_type": "software",
+  "description": "<p>SoPhyFit-Evap fits soil water retention and unsaturated hydraulic conductivity curves to HYPROP evaporation-method data with six models (van Genuchten-Mualem, Brooks-Corey, Kosugi, bimodal van Genuchten, and the PDI variants with film flow), using a simultaneous error-weighted fit. It reports all parameters, field capacity, wilting point, plant-available water, pore classes and the fitted curves with 95% confidence intervals.</p><p>This record contains the Windows installer (SoPhyFit-Evap_Setup_&lt;version&gt;.exe), the user guide and the documentation. Releases: https://github.com/Tum-Soil-Biophysics/SoPhyFit-Evap/releases</p>",
+  "creators": [
+    {
+      "name": "Zarebanadkouki, Mohsen",
+      "affiliation": "Technical University of Munich"
+    }
+  ],
+  "keywords": [
+    "soil physics",
+    "HYPROP",
+    "evaporation method",
+    "soil water retention curve",
+    "unsaturated hydraulic conductivity",
+    "van Genuchten",
+    "PDI model",
+    "field capacity",
+    "confidence intervals"
+  ],
+  "access_right": "open",
+  "language": "eng",
+  "communities": [
+    {
+      "identifier": "tum-sbe"
+    }
+  ],
+  "license": "other-nc"
+}

@@ -1,0 +1,46 @@
+# --- SoPhyFit: installers are attached to Releases, never committed ---
+*.exe
+Installer/
+
+# --- Data: raw and large data stay on the group drive (b1e), not in Git ---
+data/*
+!data/example/
+*.fits
+*.fit
+*.tif
+*.tiff
+*.h5
+*.hdf5
+*.nc
+*.mat
+*.zip
+*.7z
+*.rar
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+
+# --- R ---
+.Rhistory
+.RData
+.Rproj.user/
+
+# --- Editors and OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+
+# --- Secrets: never commit passwords or keys ---
+.env
+*.key
