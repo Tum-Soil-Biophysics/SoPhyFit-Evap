@@ -1,5 +1,7 @@
 # SoPhyFit-Evap
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23628363.svg)](https://doi.org/10.5281/zenodo.23628363)
+
 **Soil physics fitting tool for evaporation-method retention and conductivity data, with 95% confidence intervals.**
 
 SoPhyFit-Evap fits soil water retention θ(h) and unsaturated hydraulic conductivity K(h) to data from the HYPROP evaporation method, one model for both curves. It reports every parameter and every derived quantity (field capacity, wilting point, plant-available water, pore classes) with a 95% confidence interval. It is a Windows desktop program with a step-by-step interface; no programming or Python installation is needed. It is the companion of [SoPhyFit](https://github.com/Tum-Soil-Biophysics/SoPhyFit), which fits retention data from pressure plates and similar methods.
@@ -53,9 +55,9 @@ The **[User Guide (PDF)](docs/SoPhyFit-Evap_User_Guide.pdf)** explains the model
 
 If you use SoPhyFit-Evap in your work, please cite it:
 
-> Zarebanadkouki, M. (2026). SoPhyFit-Evap: Soil physics fitting tool for evaporation-method retention and conductivity data (Version 1.0.0) [Computer software]. Technical University of Munich. Zenodo. https://doi.org/[DOI]
+> Zarebanadkouki, M. (2026). SoPhyFit-Evap: Soil physics fitting tool for evaporation-method retention and conductivity data (Version 1.0.0) [Computer software]. Technical University of Munich. Zenodo. https://doi.org/10.5281/zenodo.23628363
 
-Each release is archived on [Zenodo](https://zenodo.org/communities/tum-sbe) with its own DOI, listed at the end of the release notes. Cite the version you used.
+The DOI above (10.5281/zenodo.23628363) always resolves to the latest version. Each release is also archived on [Zenodo](https://zenodo.org/communities/tum-sbe) with its own version DOI, listed at the end of the release notes. Cite the version you used.
 
 HYPROP and HYPROP-FIT are products of METER Group. SoPhyFit-Evap is an independent program that reads their exported Excel files.
 

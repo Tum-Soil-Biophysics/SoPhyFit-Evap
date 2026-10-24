@@ -11,7 +11,7 @@ authors:
     # orcid: "https://orcid.org/0000-0000-0000-0000"
 repository-code: "https://github.com/Tum-Soil-Biophysics/SoPhyFit-Evap"
 url: "https://www.lss.ls.tum.de/sbe/"
-# doi: "10.5281/zenodo.XXXXXXX"
+doi: "10.5281/zenodo.23628363"
 license: CC-BY-NC-ND-4.0
 keywords:
   - HYPROP
