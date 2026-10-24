@@ -16,4 +16,4 @@ First public release.
 - 95% confidence intervals (delta method, Student t) for parameters, curves, field capacity (four methods), wilting point, plant-available water, user points and pore classes.
 - Pore-size distribution and KA5 or user-defined pore classes.
 - Units for display and output: h in cm, hPa or kPa; θ in cm³/cm³ or %; six K units.
-- User guide (Help → User Guide); update check at start and in Help → Check for Updates.
+- User guide (Help → User Guide); Cite Us tab with the citation and the DOI of the installed version; update check at start and in Help → Check for Updates.
