@@ -65,4 +65,11 @@ Please use **[Issues](https://github.com/Tum-Soil-Biophysics/SoPhyFit-Evap/issue
 
 ## License
 
-SoPhyFit-Evap is free to use for research and teaching. See [LICENSE.md](LICENSE.md) for the terms.
+Copyright (c) 2026 Mohsen Zarebanadkouki, Chair of Soil Biophysics and Environmental Systems, Technical University of Munich.
+
+SoPhyFit-Evap and its user guide are licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+- **You may** use SoPhyFit-Evap free of charge and share the unmodified program and user guide, provided you give appropriate credit (cite SoPhyFit-Evap as shown above).
+- **You may not** sell SoPhyFit-Evap or use it for commercial purposes, and you may not distribute modified versions.
+
+See [LICENSE](LICENSE) for the full terms. For commercial use, contact the copyright holder. SoPhyFit-Evap is provided as is, without warranty of any kind.

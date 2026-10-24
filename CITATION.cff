@@ -12,7 +12,7 @@ authors:
 repository-code: "https://github.com/Tum-Soil-Biophysics/SoPhyFit-Evap"
 url: "https://www.lss.ls.tum.de/sbe/"
 # doi: "10.5281/zenodo.XXXXXXX"
-license-url: "https://github.com/Tum-Soil-Biophysics/SoPhyFit-Evap/blob/main/LICENSE.md"
+license: CC-BY-NC-ND-4.0
 keywords:
   - HYPROP
   - evaporation method
