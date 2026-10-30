@@ -1,80 +1,31 @@
-# Publishes every GitHub release of SoPhyFit-Evap to Zenodo and adds the DOI to the release notes.
-# Uploads the source archive of the tag AND the installer (.exe) attached to the release.
-# - First release: creates a new Zenodo record (new DOI).
-# - Later releases: create a new version of the same record (same "all versions" DOI).
-# - Pre-releases and private repositories are skipped; unticking "pre-release" later triggers it.
-# - If no .exe is attached when the release is published, nothing is sent to Zenodo and the run
-#   fails with a message. Attach the installer to the release, then archive it by hand:
-#   Actions > "Zenodo DOI on release" > Run workflow > enter the tag (e.g. v1.0.1).
-# Needs the organization secret ZENODO_TOKEN. Set the variable ZENODO_SANDBOX=true to test on sandbox.zenodo.org.
+# Zenodo DOI on release (SBE). Do not edit: the logic lives in Tum-Soil-Biophysics/.github.
+# - Publishing a release of a PUBLIC repository creates a Zenodo DOI in the SBE community.
+# - Private repositories and pre-releases are skipped.
+# - Actions > "Zenodo DOI on release" > Run workflow: archive an existing release again,
+#   or tick "dry run" to only check .zenodo.json (works in private repositories too).
 name: Zenodo DOI on release
 
 on:
   release:
-    types: [released]   # a release was published, or a pre-release was turned into a release
-  workflow_dispatch:     # "Run workflow" button: archive an existing release again
+    types: [released]
+  workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag to archive on Zenodo (e.g. v1.0.1)"
+        description: "Release tag (e.g. v1.0.0)"
         required: true
+      dry_run:
+        description: "Dry run: only check, publish nothing"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
 
 jobs:
   zenodo:
-    if: ${{ !github.event.repository.private && (github.event_name == 'workflow_dispatch' || !github.event.release.prerelease) }}
-    runs-on: ubuntu-latest
-    env:
-      TAG: ${{ github.event.release.tag_name || inputs.tag }}
-      GH_TOKEN: ${{ github.token }}
-    steps:
-      # Metadata (.zenodo.json) and scripts come from the checked-out branch (main when run by hand),
-      # so later fixes to the metadata also apply when an older release is archived again.
-      - name: Check out the repository
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Download the installer attached to the release
-        run: |
-          mkdir -p "${RUNNER_TEMP}/assets"
-          gh release download "$TAG" --dir "${RUNNER_TEMP}/assets" || true
-          ls -l "${RUNNER_TEMP}/assets"
-          if ! ls "${RUNNER_TEMP}"/assets/*.exe >/dev/null 2>&1; then
-            echo "::error::No installer (.exe) is attached to release $TAG. Nothing was sent to Zenodo. Attach SoPhyFit-Evap_Setup_<version>.exe to the release, then use Actions > Zenodo DOI on release > Run workflow with tag $TAG."
-            exit 1
-          fi
-
-      - name: Pack the source code of the release tag
-        run: |
-          NAME="${GITHUB_REPOSITORY#*/}"
-          git archive --format=zip --prefix="${NAME}-${TAG}/" -o "${RUNNER_TEMP}/${NAME}-${TAG}.zip" "refs/tags/${TAG}"
-          echo "ARCHIVE=${RUNNER_TEMP}/${NAME}-${TAG}.zip" >> "$GITHUB_ENV"
-
-      - name: Publish on Zenodo
-        id: zenodo
-        run: |
-          pip install --quiet requests
-          shopt -s nullglob
-          python .github/scripts/zenodo_release.py "$ARCHIVE" "${RUNNER_TEMP}"/assets/*
-        env:
-          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
-          ZENODO_SANDBOX: ${{ vars.ZENODO_SANDBOX }}
-
-      - name: Add the DOI to the release notes (replaces an older DOI line)
-        run: |
-          gh release view "$TAG" --json body -q .body > "${RUNNER_TEMP}/old.md"
-          python3 - "$DOI" "$CONCEPT_DOI" <<'EOF'
-          import os, sys
-          tmp = os.environ["RUNNER_TEMP"]
-          body = open(f"{tmp}/old.md", encoding="utf-8").read()
-          body = body.split("\n\n---\n**DOI (this version):**")[0].rstrip()
-          body += (f"\n\n---\n**DOI (this version):** https://doi.org/{sys.argv[1]}\n"
-                   f"**DOI (all versions, always the latest):** https://doi.org/{sys.argv[2]}\n")
-          open(f"{tmp}/notes.md", "w", encoding="utf-8").write(body)
-          EOF
-          gh release edit "$TAG" --notes-file "${RUNNER_TEMP}/notes.md"
-        env:
-          DOI: ${{ steps.zenodo.outputs.doi }}
-          CONCEPT_DOI: ${{ steps.zenodo.outputs.concept_doi }}
+    uses: Tum-Soil-Biophysics/.github/.github/workflows/zenodo-release.yml@main
+    with:
+      tag: ${{ github.event.release.tag_name || inputs.tag }}
+      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      required_assets: "*.exe"   # the installer must be attached to the release
+    secrets: inherit
